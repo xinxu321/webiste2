@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>故宫 · 紫禁城 | The Forbidden City</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Noto Sans SC", "Microsoft YaHei", "Arial", "Helvetica", sans-serif;
+            background-color: #fcf8f0;
+            color: #2c2c2c;
+            line-height: 1.7;
+            padding: 0 20px;
+        }
+
+        .page-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding: 0 30px 40px;
+        }
+
+        /* 顶部标题区 */
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            border-bottom: 3px solid #f5c542;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            color: #a62b2b;
+            letter-spacing: 4px;
+            margin-bottom: 6px;
+        }
+
+        .hero .subhead {
+            font-size: 1.3rem;
+            color: #8b6b3d;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        .hero .tagline {
+            margin-top: 12px;
+            font-size: 1rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* 板块卡片 */
+        .section-card {
+            margin-bottom: 50px;
+            border-radius: 12px;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #a62b2b;
+            border-left: 8px solid #f5c542;
+            padding-left: 18px;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .section-title small {
+            font-size: 1rem;
+            color: #8b6b3d;
+            font-weight: 400;
+            margin-left: 10px;
+        }
+
+        /* 图片占位及说明 */
+        .img-block {
+            width: 100%;
+            background-color: #f3ede4;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            text-align: center;
+            border: 1px solid #e0d6c8;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #8b7a66;
+            font-size: 0.95rem;
+            padding: 20px;
+        }
+
+        .img-block img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 380px;
+            object-fit: cover;
+        }
+
+        .img-caption {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #8b7a66;
+            text-align: center;
+            padding: 0 10px 10px;
+        }
+
+        .img-caption .en {
+            font-style: italic;
+            color: #a0907e;
+        }
+
+        /* 双语文本块 */
+        .bilingual {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 30px;
+            margin-top: 10px;
+        }
+
+        .bilingual .cn,
+        .bilingual .en {
+            flex: 1 1 280px;
+        }
+
+        .bilingual .cn {
+            color: #2c2c2c;
+        }
+
+        .bilingual .en {
+            color: #4a4a4a;
+            font-size: 0.97rem;
+        }
+
+        .bilingual p {
+            margin-bottom: 10px;
+        }
+
+        /* 数字看故宫 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 20px;
+            margin: 20px 0 10px;
+        }
+
+        .stat-item {
+            background: #fef9f0;
+            border-radius: 10px;
+            padding: 18px 12px;
+            text-align: center;
+            border: 1px solid #f0e4d0;
+            transition: transform 0.2s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(166, 43, 43, 0.08);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #a62b2b;
+            line-height: 1.2;
+        }
+
+        .stat-label-cn {
+            font-size: 0.95rem;
+            color: #5a4a3a;
+            margin-top: 4px;
+        }
+
+        .stat-label-en {
+            font-size: 0.8rem;
+            color: #8b7a66;
+            font-style: italic;
+        }
+
+        /* 建筑细节三列 */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 15px;
+        }
+
+        .detail-card {
+            background: #fef9f0;
+            border-radius: 12px;
+            padding: 16px 16px 20px;
+            border: 1px solid #f0e4d0;
+        }
+
+        .detail-card h4 {
+            color: #a62b2b;
+            font-size: 1.15rem;
+            margin-bottom: 6px;
+        }
+
+        .detail-card .en-sub {
+            color: #8b6b3d;
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .detail-card p {
+            font-size: 0.92rem;
+            color: #3a3a3a;
+            margin-bottom: 6px;
+        }
+
+        .detail-card .en-text {
+            color: #5a5a5a;
+            font-size: 0.88rem;
+            font-style: italic;
+        }
+
+        /* 结语 */
+        .closing {
+            margin-top: 40px;
+            padding: 28px 20px;
+            background: #a62b2b;
+            color: #fff8e7;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+
+        .closing .en {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.95rem;
+            color: #f5e6c8;
+            font-style: italic;
+        }
+
+        /* 底部来源 */
+        .footer-note {
+            text-align: center;
+            padding: 20px 0 0;
+            font-size: 0.78rem;
+            color: #b0a090;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .page-wrapper {
+                padding: 0 15px 25px;
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+
+            .hero h1 {
+                font-size: 1.9rem;
+                letter-spacing: 2px;
+            }
+
+            .hero .subhead {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+                padding-left: 12px;
+            }
+
+            .stat-number {
+                font-size: 1.6rem;
+            }
+
+            .bilingual {
+                gap: 10px;
+            }
+
+            .closing {
+                font-size: 1rem;
+                padding: 20px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+
+        <!-- 顶部 -->
+        <div class="hero">
+            <h1>故宫 · 紫禁城</h1>
+            <div class="subhead">The Forbidden City · The Palace Museum</div>
+            <div class="tagline">孔子学院开放日 · 北京中轴线上的世界文化遗产<br><span style="font-style:italic; font-size:0.9rem;">Confucius Institute Open Day · A World Heritage Site on Beijing's Central Axis</span></div>
+        </div>
+
+        <!-- 板块一：故宫是什么 -->
+        <div class="section-card">
+            <h2 class="section-title">一、故宫是什么 <small>What is the Forbidden City?</small></h2>
+            <div class="img-block">
+                <!-- 图片占位：建议替换为故宫实景图 -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Forbidden_City_Beijing_Shenwumen_Gate.JPG/800px-Forbidden_City_Beijing_Shenwumen_Gate.JPG" alt="故宫神武门与角楼" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'padding:40px 20px;color:#8b7a66;\'>图片占位：建议替换为故宫实景图<br><small>Image placeholder: replace with a real photo of the Forbidden City</small></div>';">
+                <div class="img-caption">神武门与角楼 · 故宫北门 <span class="en">Shenwumen Gate and Corner Tower · North Gate of the Forbidden City</span></div>
+            </div>
+            <div class="bilingual">
+                <div class="cn">
+                    <p>故宫位于北京中轴线的中心，旧称“紫禁城”，是明清两代（1368—1911）的皇宫。曾有24位皇帝在此居住和处理政务。1987年被联合国教科文组织列入世界文化遗产名录。</p>
+                    <p>紫禁城之名源于古代天文学——紫微垣位于天之中，对应天子所居，加之宫禁森严，故称“紫禁”。</p>
+                </div>
+                <div class="en">
+                    <p>The Forbidden City, also known as the Palace Museum, sits at the center of Beijing's central axis. It served as the imperial palace for the Ming and Qing dynasties, housing 24 emperors over nearly 500 years. It was inscribed as a UNESCO World Heritage Site in 1987.</p>
+                    <p>The name "Forbidden City" reflects its status as the emperor's residence, where entry was strictly forbidden to commoners.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 板块二：数字看故宫 -->
+        <div class="section-card">
+            <h2 class="section-title">二、数字看故宫 <small>Numbers that Tell the Story</small></h2>
+            <div class="img-block">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Forbidden_City_Beijing_%28Kun_Ning_Gong%29.JPG/800px-Forbidden_City_Beijing_%28Kun_Ning_Gong%29.JPG" alt="紫禁城建筑群" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'padding:40px 20px;color:#8b7a66;\'>图片占位：建议替换为故宫实景图<br><small>Image placeholder: replace with a real photo of the Forbidden City</small></div>';">
+                <div class="img-caption">紫禁城建筑群 · 俯瞰视角 <span class="en">Aerial view of the Forbidden City complex</span></div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">72万</div>
+                    <div class="stat-label-cn">占地面积（平方米）</div>
+                    <div class="stat-label-en">720,000 m² site area</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15万</div>
+                    <div class="stat-label-cn">建筑面积（平方米）</div>
+                    <div class="stat-label-en">150,000 m² built area</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">9999.5</div>
+                    <div class="stat-label-cn">相传房间数量</div>
+                    <div class="stat-label-en">Rooms (legendary count)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label-cn">城墙高度（米）</div>
+                    <div class="stat-label-en">City wall height (m)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">52</div>
+                    <div class="stat-label-cn">护城河宽度（米）</div>
+                    <div class="stat-label-en">Moat width (m)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">186万+</div>
+                    <div class="stat-label-cn">现有藏品（件）</div>
+                    <div class="stat-label-en">Artifacts in collection</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 板块三：建筑布局——前朝后寝 -->
+        <div class="section-card">
+            <h2 class="section-title">三、建筑布局：前朝后寝 <small>Architectural Layout: Outer Court & Inner Court</small></h2>
+            <div class="img-block">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Hall_of_Supreme_Harmony_%28Taihe_Dian%29.jpg/800px-Hall_of_Supreme_Harmony_%28Taihe_Dian%29.jpg" alt="太和殿广场" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'padding:40px 20px;color:#8b7a66;\'>图片占位：建议替换为故宫实景图<br><small>Image placeholder: replace with a real photo of the Forbidden City</small></div>';">
+                <div class="img-caption">太和殿广场 · 外朝核心 <span class="en">Hall of Supreme Harmony Square · Heart of the Outer Court</span></div>
+            </div>
+            <div class="bilingual">
+                <div class="cn">
+                    <p>故宫建筑分为“外朝”与“内廷”两部分。外朝以太和殿、中和殿、保和殿三大殿为中心，是举行国家大典的地方。内廷以乾清宫、交泰殿、坤宁宫为中心，是皇帝和皇后居住的正宫，两侧为东六宫和西六宫，供妃嫔居住。</p>
+                    <p>这种“前朝后寝”的布局，体现了中国古代宫殿建筑“礼”与“生活”分区的理念。</p>
+                </div>
+                <div class="en">
+                    <p>The Forbidden City is divided into two main sections: the Outer Court and the Inner Court. The Outer Court, centered on the three great halls—Taihe, Zhonghe, and Baohe—was used for grand state ceremonies. The Inner Court, centered on the Qianqing, Jiaotai, and Kunning palaces, served as the residence of the emperor and empress, flanked by the Six Eastern and Six Western Palaces for consorts.</p>
+                    <p>This layout reflects the traditional Chinese architectural principle of separating ceremonial spaces from living quarters.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 板块四：值得记住的建筑细节 -->
+        <div class="section-card">
+            <h2 class="section-title">四、值得记住的建筑细节 <small>Architectural Details Worth Remembering</small></h2>
+            <div class="detail-grid">
+                <!-- 角楼 -->
+                <div class="detail-card">
+                    <div class="img-block" style="min-height:140px; margin-bottom:12px; padding:10px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Corner_tower_of_the_Forbidden_City.jpg/640px-Corner_tower_of_the_Forbidden_City.jpg" alt="故宫角楼" loading="lazy" style="max-height:160px;" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'padding:20px;color:#8b7a66;font-size:0.85rem;\'>图片占位：角楼<br><small>Image: Corner Tower</small></div>';">
+                    </div>
+                    <h4>角楼</h4>
+                    <span class="en-sub">Corner Towers</span>
+                    <p>城墙四角各有一座角楼，民间形容其结构为“九梁十八柱七十二条脊”，造型极为精巧，是紫禁城防卫设施的一部分。</p>
+                    <p class="en-text">The corner towers feature a complex cross-shaped structure with multiple levels of roofs, showcasing extraordinary craftsmanship.</p>
+                </div>
+                <!-- 黄色琉璃瓦 -->
+                <div class="detail-card">
+                    <div class="img-block" style="min-height:140px; margin-bottom:12px; padding:10px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Forbidden_City_roof_tiles.jpg/640px-Forbidden_City_roof_tiles.jpg" alt="故宫黄色琉璃瓦" loading="lazy" style="max-height:160px;" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'padding:20px;color:#8b7a66;font-size:0.85rem;\'>图片占位：琉璃瓦<br><small>Image: Glazed Tiles</small></div>';">
+                    </div>
+                    <h4>黄色琉璃瓦</h4>
+                    <span class="en-sub">Yellow Glazed Tiles</span>
+                    <p>故宫屋顶以黄色琉璃瓦为主，黄色在五行中对应“土”，象征天子居天下之中、统御四方。唯一的例外是藏书楼文渊阁，用黑瓦取“水克火”之意。</p>
+                    <p class="en-text">Yellow glazed tiles dominate the roofs as yellow symbolized imperial authority. The only exception is the imperial library, which uses black tiles representing water to ward off fire.</p>
+                </div>
+                <!-- 太和殿脊兽 -->
+                <div class="detail-card">
+                    <div class="img-block" style="min-height:140px; margin-bottom:12px; padding:10px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Roof_ridge_beasts_on_Hall_of_Supreme_Harmony.jpg/640px-Roof_ridge_beasts_on_Hall_of_Supreme_Harmony.jpg" alt="太和殿脊兽" loading="lazy" style="max-height:160px;" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'padding:20px;color:#8b7a66;font-size:0.85rem;\'>图片占位：脊兽<br><small>Image: Roof Ridge Beasts</small></div>';">
+                    </div>
+                    <h4>太和殿的脊兽</h4>
+                    <span class="en-sub">Ridge Beasts of Taihe Hall</span>
+                    <p>太和殿屋顶上有10只脊兽，是中国古建筑中等级最高的配置。</p>
+                    <p class="en-text">The Hall of Supreme Harmony has ten roof ridge beasts, the highest number found on any ancient Chinese building.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 板块五：从皇宫到博物馆 -->
+        <div class="section-card">
+            <h2 class="section-title">五、从皇宫到博物馆 <small>From Imperial Palace to Public Museum</small></h2>
+            <div class="img-block">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Forbidden_City_Beijing_Shenwumen_Gate_%28Gate_of_Divine_Might%29.jpg/800px-Forbidden_City_Beijing_Shenwumen_Gate_%28Gate_of_Divine_Might%29.jpg" alt="神武门匾额" loading="lazy" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'padding:40px 20px;color:#8b7a66;\'>图片占位：建议替换为神武门匾额实景图<br><small>Image placeholder: replace with a real photo of the Shenwumen Gate plaque</small></div>';">
+                <div class="img-caption">神武门 · “故宫博物院”匾额 <span class="en">Shenwumen Gate · Plaque of the Palace Museum</span></div>
+            </div>
+            <div class="bilingual">
+                <div class="cn">
+                    <p>1911年辛亥革命推翻帝制，1925年10月10日故宫博物院正式成立，紫禁城从皇宫转变为面向公众开放的博物馆。如今故宫博物院是世界上参观人数最多的博物馆之一。</p>
+                    <p>故宫不仅是中国古代建筑艺术的巅峰之作，也是中华文明五千年历史的缩影。</p>
+                </div>
+                <div class="en">
+                    <p>After the 1911 Revolution ended imperial rule, the Palace Museum was established on October 10, 1925. The former imperial palace opened its doors to the public, and today it is one of the most visited museums in the world.</p>
+                    <p>The Forbidden City is not only a masterpiece of ancient Chinese architecture but also a living testament to five thousand years of Chinese civilization.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结语 -->
+        <div class="closing">
+            🌏 故宫不仅属于中国，也属于世界——欢迎你来北京亲眼看看它。
+            <span class="en">The Forbidden City belongs not only to China but to the world — come and see it for yourself in Beijing.</span>
+        </div>
+
+        <!-- 底部来源说明 -->
+        <div class="footer-note">
+            图片来源：Wikimedia Commons · 故宫博物院官网 (dpm.org.cn) 建议替换为官方授权图片<br>
+            <span style="font-style:italic;">Image sources: Wikimedia Commons · Palace Museum official website. Replace with authorized photos when possible.</span>
+        </div>
+
+    </div>
+</body>
+</html>
